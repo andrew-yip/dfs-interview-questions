@@ -44,11 +44,12 @@ public class palantir_intern_question {
 
         // starting board positions
         int[] start1 = new int[] { 1, 1 };
-        /*
-         * int[] start2 = new int[] { 5, 3 }; int[] start3 = new int[] { 5, 1 }; int[]
-         * start4 = new int[] { 6, 0 }; int[] start5 = new int[] { 6, 4 }; int[] start6
-         * = new int[] { 0, 0 }; int[] start7 = new int[] { 2, 2 };
-         */
+        int[] start2 = new int[] { 5, 3 };
+        int[] start3 = new int[] { 5, 1 };
+        int[] start4 = new int[] { 6, 0 };
+        int[] start5 = new int[] { 6, 4 };
+        int[] start6 = new int[] { 0, 0 };
+        int[] start7 = new int[] { 2, 2 };
 
         findLegalMoves(board, start1[0], start1[1], start1[0], start1[1]);
 
@@ -56,5 +57,30 @@ public class palantir_intern_question {
 
     public static void findLegalMoves(int[][] board, int i, int j, int originalI, int originalJ) {
 
+        // determine if this is a valid space
+        if ((board[i][j] == 0 && i != originalI) || (board[i][j] == 0 && j != originalJ)) {
+            System.out.println("i: " + i + " , j: " + j);
+        }
+
+        // base case
+        if (i < 0 || i >= board.length || j < 0 || j >= board[i].length || board[i][j] != 0 || board[i][j] != 0
+                || Math.abs(i - originalI) > 1 || Math.abs(j - originalJ) > 1
+                || (Math.abs(i - originalI) == 1 && Math.abs(j - originalJ) != 1)
+                || (Math.abs(j - originalJ) == 1 && Math.abs(i - originalI) != 1)) {
+            return;
+        }
+
+        // for backtracking
+        // int temp = board[i][j];
+        // board[i][j] = -1;
+
+        // dfs
+        findLegalMoves(board, i + 1, j, originalI, originalJ);
+        findLegalMoves(board, i - 1, j, originalI, originalJ);
+        findLegalMoves(board, i, j + 1, originalI, originalJ);
+        findLegalMoves(board, i, j - 1, originalI, originalJ);
+
+        // backtracking
+        // board[i][j] = temp;
     }
 }
