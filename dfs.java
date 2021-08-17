@@ -56,29 +56,5 @@ public class dfs {
 
     public static void findLegalMoves(int[][] board, int i, int j, int originalI, int originalJ) {
 
-        // base case
-        if (i >= board.length || i < 0 || j >= board[i].length || j < 0 || board[i][j] != 0) {
-            return;
-        }
-
-        // how to determine if there is a open space
-        if (board[i][j] == 0 && i != originalI && j != originalJ && Math.abs(i - originalI) == 1
-                && Math.abs(j - originalJ) == 1) {
-            System.out.println("i: " + i + ", j: " + j);
-            return;
-        }
-
-        // for backtracking purposes
-        int temp = board[i][j];
-        board[i][j] = -1;
-
-        // dfs
-        findLegalMoves(board, i + 1, j, originalI, originalJ); // right
-        findLegalMoves(board, i - 1, j, originalI, originalJ); // left
-        findLegalMoves(board, i, j + 1, originalI, originalJ); // up
-        findLegalMoves(board, i, j - 1, originalI, originalJ); // down
-
-        board[i][j] = temp;
-
     }
 }
