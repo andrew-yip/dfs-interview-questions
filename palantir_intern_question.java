@@ -57,30 +57,26 @@ public class palantir_intern_question {
 
     public static void findLegalMoves(int[][] board, int i, int j, int originalI, int originalJ) {
 
+        // System.out.println("i: " + i + " , j: " + j);
+
         // determine if this is a valid space
         if ((board[i][j] == 0 && i != originalI) || (board[i][j] == 0 && j != originalJ)) {
             System.out.println("i: " + i + " , j: " + j);
         }
 
-        // base case
-        if (i < 0 || i >= board.length || j < 0 || j >= board[i].length || board[i][j] != 0 || board[i][j] != 0
+        // base case (out of bounds, if you move 2 spots: left, right, up or down, or
+        // diagonal movements)
+        if (i < 0 || i >= board.length || j < 0 || j >= board[i].length || board[i][j] == -1
                 || Math.abs(i - originalI) > 1 || Math.abs(j - originalJ) > 1
                 || (Math.abs(i - originalI) == 1 && Math.abs(j - originalJ) != 1)
                 || (Math.abs(j - originalJ) == 1 && Math.abs(i - originalI) != 1)) {
             return;
         }
 
-        // for backtracking
-        // int temp = board[i][j];
-        // board[i][j] = -1;
-
         // dfs
         findLegalMoves(board, i + 1, j, originalI, originalJ);
         findLegalMoves(board, i - 1, j, originalI, originalJ);
         findLegalMoves(board, i, j + 1, originalI, originalJ);
         findLegalMoves(board, i, j - 1, originalI, originalJ);
-
-        // backtracking
-        // board[i][j] = temp;
     }
 }
